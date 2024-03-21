@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<string.h>
+void tron(char s1[], char s2[], char s[])
+{
+	int n = strlen(s1);
+	char s3[205], s4[205];
+	strcpy(s3, s1);
+	strcpy(s4, s2);
+	int dem = 0;
+	while (1)
+	{
+		dem++;
+		int cnt = 0;
+		char t[405];
+		for (int i = 0; i < n; i++)
+		{
+			t[cnt++] = s2[i];
+			t[cnt++] = s1[i];
+		}
+		t[cnt] = NULL;
+		if (strcmp(s, t) == 0)
+		{
+			printf("%d\n", dem);
+			break;
+		}
+		else 
+		{
+			for (int i = 0; i < n ; i++)
+			{
+				s1[i] = t[i];
+				s2[i] = t[i+n];
+			}
+		}
+		if (strcmp(s1, s3) == 0 && strcmp(s2, s4) == 0)
+		{
+			printf("-1\n");
+			break;
+		}
+	}
+}
+int main()
+{
+	while (1)
+	{
+		int t;
+		scanf("%d", &t);
+		if (t==0) break;
+		char s1[205], s2[205], s[405];
+		scanf("%s%s%s", s1, s2, s);
+		tron(s1, s2, s);
+	}
+}
