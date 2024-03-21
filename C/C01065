@@ -1,0 +1,23 @@
+#include<stdio.h>
+#include<math.h>
+#define ll long long
+void check(ll n)
+{
+	int a[15] = {0};
+	while (n)
+	{
+		int tmp = n%10;
+		if (tmp == 2 || tmp == 3 || tmp == 5 || tmp == 7) a[tmp]++;
+		n/=10;
+	}
+	for (int i = 2; i <= 7; i++)
+	{
+		if (a[i] != 0) printf("%d %d\n", i, a[i]);
+	}
+}
+int main()
+{
+	ll n;
+	scanf("%lld", &n);
+	check(n);
+}
