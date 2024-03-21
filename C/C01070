@@ -1,0 +1,37 @@
+#include<stdio.h>
+#include<math.h>
+void swap(int *a, int *b) {
+	int tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+int main() {
+	int a[3], b[3];
+	for (int i = 0; i < 3; i++) scanf("%d%d", &a[i], &b[i]);
+	int tongdt = 0;
+	for (int i = 0; i < 3; i++) {
+		tongdt += a[i]*b[i];
+	}
+	int m = sqrt(tongdt);
+	if (m*m != tongdt) printf("NO");
+	else {
+		for (int i = 0; i < 3; i++) {
+			if (a[i] > b[i]) swap(&a[i], &b[i]);
+		}
+		if (b[0] == m && b[0] == b[1] && b[0] == b[2]) printf("YES");
+		else {
+			for (int i = 1; i < 3; i++) {
+				if (b[i] > b[0]) {
+					swap(&a[0], &a[i]);
+					swap(&b[0], &b[i]);
+				}
+			}
+			if (b[0] == m) {
+				if (a[1] + a[2] == m || b[1] + b[2] == m || a[1] + b[2] == m || a[2] + b[1] == m) printf("YES");
+				else printf("NO");
+			} else printf("NO");
+		}
+
+	}
+
+}
