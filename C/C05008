@@ -1,0 +1,56 @@
+#include<stdio.h>
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	int dem = 1;
+	while (t--)
+	{
+		int n, m;
+		scanf("%d%d", &n, &m);
+		int a[15][15];
+		for (int i = 0; i < n; i++)
+		{
+			for (int j = 0; j < m; j++) scanf("%d", &a[i][j]);
+		}
+		int h = 0, max1 = 0;
+		for (int i = 0; i < n; i++)
+		{
+			int sum = 0;
+			for (int j = 0; j < m; j++)
+			{
+				sum += a[i][j];
+			}
+			if (sum > max1)
+			{
+				max1 = sum;
+				h = i;
+			}
+		}
+		int c = 0, max2= 0;
+		for (int i = 0; i < m; i++)
+		{
+			int sum = 0;
+			for (int j = 0; j < n; j++)
+			{
+				if (j!=h) sum += a[j][i];
+			}
+			if (sum > max2)
+			{
+				max2 = sum;
+				c = i;
+			}
+		}
+		printf("Test %d:\n", dem++);
+		for (int i = 0; i < n; i++)
+		{
+			if (i==h) continue;
+			for (int j = 0; j < m; j++)
+			{
+				if(j==c) continue;
+				printf("%d ", a[i][j]);
+			}
+			printf("\n");
+		}
+	}
+}
