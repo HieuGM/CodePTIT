@@ -1,0 +1,44 @@
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+char* my_strlwr(char *s)
+{
+	for (int i = 0; i < strlen(s); i++)
+	{
+		s[i] = tolower(s[i]);
+	}
+	return s;
+}
+int main()
+{
+	char s[100005];
+	fgets(s, 100005, stdin);
+	s[strlen(s) - 1] = '\0';
+	my_strlwr(s);
+	char *t = strtok(s, " ");
+	char a[105][105];
+	int n = 0;
+	while (t != NULL)
+	{
+		strcpy(a[n], t);
+		n++;
+		t = strtok(NULL, " ");
+	}
+	int b[100005] = {0};
+	for (int i = 0; i < n; i++)
+	{
+		int dem = 1;
+		if (b[i] == 0)
+		{
+			for (int j = i+1; j < n; j++)
+			{
+				if(strcmp(a[i], a[j]) == 0)
+				{
+					dem++;
+					b[j] = 1;
+				}
+			}
+			printf("%s %d\n", a[i], dem);
+		}
+	}
+}
