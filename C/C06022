@@ -1,0 +1,46 @@
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+int my_strcmpi(char s[], char t[])
+{
+	int len1 = strlen(s), len2 = strlen(t);
+	if (len1 != len2) return 0;
+	int min;
+	if (len1 < len2) min = len1;
+	else min = len2;
+	for (int i = 0; i < min; i++)
+	{
+		if (tolower(s[i]) != tolower(t[i])) return 0;
+	}
+	return 1;
+}
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	getchar();
+	int dem = 1;
+	while (t--)
+	{
+		char s1[205], s2[25];
+		fgets(s1, 205, stdin);
+		s1[strlen(s1)-1] = '\0';
+		scanf("%s", s2);
+		getchar();
+		int n = 0;
+		char s[205][205];
+		char *token = strtok(s1, " ");
+		printf("Test %d: ", dem++);
+		while (token!=NULL)
+		{
+			if (my_strcmpi(token, s2) == 0) strcpy(s[n++], token);
+			token = strtok(NULL, " ");
+		}
+		for (int i = 0; i < n; i++)
+		{
+			printf("%s", s[i]);
+			if (i < n-1) printf(" ");
+		}
+		printf("\n");
+	}
+}
