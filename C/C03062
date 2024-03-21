@@ -1,0 +1,27 @@
+#include<stdio.h>
+long long gcd(long long a, int b)
+{
+	while (b)
+	{
+		int r = a%b;
+		a = b;
+		b = r;
+	}
+	return a;
+}
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	while (t--)
+	{
+		int n, m;
+		scanf("%d%d", &n, &m);
+		long long tmp = n;
+		for (int i = n+1; i <= m; i++)
+		{
+			tmp = tmp*i/gcd(tmp, i);
+		}
+		printf("%lld\n", tmp);
+	}
+}
