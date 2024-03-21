@@ -1,0 +1,29 @@
+#include<stdio.h>
+long long check(int a[], int n)
+{
+	long long sum1 = 0, sum2 = 0;
+	for (int i = 0; i < n; i++)
+	{
+		sum1 += a[i];
+		if (sum1 > sum2) sum2 = sum1;
+		else
+		{
+			if (sum1 < 0) sum1 = 0;
+			else sum1 = sum1;
+		}
+	}
+	return sum2;
+}
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	while (t--)
+	{
+		int n;
+		scanf("%d", &n);
+		int a[100005];
+		for (int i = 0; i < n ; i++) scanf("%d", &a[i]);
+		printf("%lld\n", check(a, n));
+	}
+}
