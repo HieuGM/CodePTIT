@@ -1,0 +1,22 @@
+#include<stdio.h>
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	while (t--)
+	{
+		long long n;
+		scanf("%lld", &n);
+		while(n)
+		{
+			int tmp = n%10;
+			n/=10;
+			if (tmp < n%10)
+			{
+				printf("NO\n");
+				break;
+			}
+		}
+		if (n==0) printf("YES\n");
+	}
+}
