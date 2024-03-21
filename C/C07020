@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include<string.h>
+struct pokemon{
+	char ten[105];
+	int can, co, th; // can, co, tien hoa;
+};
+typedef struct pokemon pkm;
+void nhap(pkm t[75], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		scanf("\n");
+		gets(t[i].ten);
+		scanf("%d%d", &t[i].can, &t[i].co);
+	}
+}
+int max = 0;
+int dem = 0;
+void xuly(pkm t[75], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		t[i].th = 0;
+		while (t[i].co >= t[i].can)
+		{
+			int tmp = t[i].co/t[i].can;
+			t[i].th += tmp;
+			t[i].co %=t [i].can;
+			t[i].co += 2*tmp;
+		}
+		dem += t[i].th;
+		if (t[i].th > max) max = t[i].th;
+	}
+}
+void xuat(pkm t[75], int n)
+{
+	printf("%d\n", dem);
+	for (int i = 0; i < n; i++)
+	{
+		if (t[i].th == max)
+		{
+			printf("%s", t[i].ten);
+			break;
+		}
+	}
+}
+int main()
+{
+	int n;
+	scanf("%d\n", &n);
+	pkm t[75];
+	nhap(t, n);
+	xuly(t, n);
+	xuat(t, n);
+}
