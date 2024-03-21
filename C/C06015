@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+void chuan(char s[])
+{
+	s[0] = toupper(s[0]);
+	for (int i = 1; i < strlen(s); i++) s[i] = tolower(s[i]);
+}
+void chuan2(char s[])
+{
+	for (int i = 0; i < strlen(s); i++) s[i] = toupper(s[i]);
+}
+int main()
+{
+	int t;
+	scanf("%d\n", &t);
+	while(t--)
+	{
+		char s[55];
+		fgets(s, 55, stdin);
+		s[strlen(s)-1] = '\0';
+		char a[55][25];
+		int cnt = 0;
+		char *token = strtok(s, " ");
+		chuan2(token);
+		strcpy(a[cnt++], token);
+		token = strtok(NULL, " ");
+		while (token != NULL)
+		{
+			chuan(token);
+			strcpy(a[cnt++], token);
+			token = strtok(NULL, " ");
+		}
+		for (int i = 1; i < cnt; i++)
+		{
+			printf("%s", a[i]);
+			if (i==cnt-1) printf(",");
+			else printf(" ");
+		}
+		printf(" %s\n", a[0]);
+	}
+}
