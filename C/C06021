@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	getchar();
+	while (t--)
+	{
+		char s[1005];
+		scanf("%s", s);
+		int c = 0, l = 0;
+		int a[1005];
+		int n = strlen(s);
+		if (s[0] - '0' == 0)
+		{
+			printf("INVALID\n");
+			continue;
+		}
+		int tmp = 0;
+		for (int i = 0; i < n; i++)
+		{
+			if (isdigit(s[i])) 
+			{
+				a[i] = s[i] - '0';
+				if(a[i]%2 == 0) c++;
+				else l++;
+			}
+			else {
+				tmp = 1;
+				break;
+			}
+		}
+		if (tmp == 1) printf("INVALID\n");
+		else 
+		{
+			if ((n%2 == 0 && c > l) || (n%2 == 1 && l > c)) printf("YES\n");
+			else printf("NO\n");
+		}
+	}
+}
