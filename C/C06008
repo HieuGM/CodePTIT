@@ -1,0 +1,25 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	char s1[105];
+	char a[50][50];
+	gets(s1);
+	int n = 0;
+	char *t = strtok(s1, " ");
+	while (t != NULL)
+	{
+		strcpy(a[n], t);
+		n++;
+		t = strtok(NULL, " ");
+	}
+	for (int i = 0; i < n; i++)
+	{
+		int tmp = 0;
+		for (int j = i-1; j >=0; j--)
+		{
+			if (strcmp(a[j], a[i]) == 0) tmp = 1;
+		}
+		if (tmp == 0) printf("%s ", a[i]);
+	}
+}
