@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include<math.h>
+#include<string.h>
+struct diem{
+	double x, y;
+};
+typedef struct diem diem;
+double canh(diem p1, diem p2)
+{
+	return sqrt((p1.x-p2.x)*(p1.x-p2.x)+(p1.y-p2.y)*(p1.y-p2.y));
+}
+double dientich(diem A, diem B, diem C)
+{
+	double a = canh(A, B), b = canh(B, C), c = canh(C, A);
+	if (a+b<=c || a+c<=b || b+c <= a) return -1.0;
+	double p = (a+b+c)/2.0;
+	return sqrt(p*(p-a)*(p-b)*(p-c));
+}
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	while (t--)
+	{
+		diem A, B, C;
+		scanf("%lf%lf%lf%lf%lf%lf", &A.x, &A.y, &B.x, &B.y, &C.x, &C.y);
+		if (dientich(A, B, C) < 0) printf("INVALID\n");
+		else printf("%.2lf\n", dientich(A, B, C));
+	}
+}
