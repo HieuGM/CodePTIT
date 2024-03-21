@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+#include<stdlib.h>
+#include<math.h>
+void reverse(int s[], int n) // Lat nguoc so
+{
+	int l = 0, r = n-1;
+	while (l<r)
+	{
+		int tmp = s[l];
+		s[l] = s[r];
+		s[r] = tmp;
+		l++; r--;
+	}
+}
+int main()
+{
+	char s[205];
+	scanf("%s", s);
+	int n = strlen(s);
+	while (n>1)
+	{
+		char s2[105], s1[105];
+		strncpy(s2, s, n/2);
+		s2[n/2] = '\0';
+		strcpy(s1, s+n/2);
+		int n1 = strlen(s1), n2 = strlen(s2);
+		int x[n1], y[n1];
+		int z[n1+1];
+		for (int i = 0; i < n1; i++) x[i] = s1[i] - '0'; // Chuyen char sang int
+		for (int i = 0; i < n2; i++) y[i] = s2[i] - '0';
+		reverse(x, n1);
+		reverse(y, n2); // Lat nguoc de tinh thuan tien
+		for (int i = n2; i < n1; i++) y[i] = 0;
+		int m = 0;
+		int nho = 0; // Neu 2 so cong lai > 10 thi nho = 1
+		for (int i = 0; i < n1; i++)
+		{
+			int tmp = x[i] + y[i] + nho;
+			z[m++] = tmp%10;
+			nho = tmp/10;
+		}
+		if (nho>0) z[m++] = nho;
+		reverse(z, m);
+		for (int i = 0; i < m; i++)
+		{
+			s[i] = z[i] + '0';
+		}
+		s[m] = '\0';
+		printf("%s", s);
+		printf("\n");
+		n = strlen(s);
+	}
+	
+}
