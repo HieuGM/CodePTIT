@@ -1,0 +1,24 @@
+#include<stdio.h>
+#include<math.h>
+#include<stdlib.h>
+int canh(int x[4], int y[4])
+{
+	int minx, miny, maxx, maxy;
+	if (x[0] < y[0]) minx = x[0];
+	else minx = y[0];
+	if (x[1] < y[1]) miny = x[1];
+	else miny = y[1];
+	if (x[2] < y[2]) maxx = y[2];
+	else maxx = x[2];
+	if (x[3] < y[3]) maxy = y[3];
+	else maxy = x[3];
+	if (maxx - minx > maxy - miny) return maxx - minx;
+	return maxy - miny;
+}
+int main()
+{
+	int x[4], y[4];
+	for (int i = 0; i < 4; i++) scanf("%d", &x[i]);
+	for (int i = 0; i < 4; i++) scanf("%d", &y[i]);
+	printf("%d", canh(x, y) * canh(x,y));
+}
