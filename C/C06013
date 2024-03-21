@@ -1,0 +1,61 @@
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+int b[10] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	while (t--)
+	{
+		char s[1005];
+		scanf("%s", s);
+		int n = strlen(s);
+		int a[1005];
+		int dem = 0;
+		int tmp = 0;
+		if (s[0] - '0' == 0)
+		{
+			printf("INVALID\n");
+			continue;
+		}
+		for (int i = 0; i < n; i++)
+		{
+			if (isdigit(s[i]) == 0) 
+			{
+				tmp = 1;
+				break;
+			}
+			else {
+				a[dem++] = s[i] - '0';
+			}
+		}
+		if (tmp == 1)
+		{
+			printf("INVALID\n");
+			continue;
+		}
+		else 
+		{
+			for (int i = 0; i < 10; i++)
+			{
+				int cnt = 1;
+				for (int j = 0; j < dem; j++)
+				{
+					if (a[j] == b[i])
+					{
+						cnt = 0; 
+						break;
+					}
+				}
+				if (cnt == 1)
+				{
+					tmp = 1;
+					break;
+				}
+			}
+			if (tmp == 0) printf("YES\n");
+			else printf("NO\n");
+		}
+	}
+}
