@@ -1,0 +1,108 @@
+#include<stdio.h>
+#include<string.h>
+struct dathuc{
+	int heso, mu;
+};
+typedef struct dathuc dt;
+void xuly(dt a[100005], dt b[100005], int dema, int demb)
+{
+	dt kq[10005];
+	int dem = 0;
+	int i = 0, j = 0;
+	while (i<dema && j<demb)
+	{
+		if (a[i].mu > b[j].mu)
+		{
+			kq[dem] = a[i];
+			dem++;
+			i++;
+		}
+		else if (a[i].mu < b[j].mu)
+		{
+			kq[dem] = b[j];
+			dem++;
+			j++;
+		}
+		else 
+		{
+			kq[dem].heso = a[i].heso+b[j].heso;
+			kq[dem].mu = a[i].mu;
+			dem++;
+			i++;
+			j++;
+		}
+	}
+	while (i<dema)
+	{
+		kq[dem] = a[i];
+		dem++;
+		i++;
+	}
+	while (j<demb)
+	{
+		kq[dem] = b[j];
+		dem++;
+		j++;
+	}
+	for (int k = 0; k < dem; k++)
+	{
+		printf("%d*x^%d", kq[k].heso, kq[k].mu);
+		if (k<dem-1) printf(" + ");
+	}
+	printf("\n");
+}
+int main()
+{
+	int t;
+	scanf("%d\n", &t);
+	while(t--)
+	{
+		dt a[100005], b[100005];
+		int n;
+		int dema = 0, demb = 0;
+		char s1[100005], s2[100005];
+		gets(s1);
+		scanf("\n");
+		gets(s2);
+		scanf("\n");
+		for (int i = 0; i < strlen(s1); i++)
+		{
+			if (s1[i]>='0' && s1[i] <= '9')
+			{
+				a[dema].heso = 0;
+				a[dema].mu = 0;
+				while (s1[i]>='0' && s1[i]<='9')
+				{
+					a[dema].heso = a[dema].heso*10+s1[i] - '0';
+					i++;
+				}
+				i+=3;
+				while (s1[i]>='0' && s1[i]<='9'){
+					a[dema].mu = a[dema].mu*10+s1[i]-'0';
+					i++;
+				}
+				dema++;
+			}
+		}
+		for (int i = 0; i < strlen(s2); i++)
+		{
+			if (s2[i]>='0' && s2[i] <= '9')
+			{
+				b[demb].heso = 0;
+				b[demb].mu = 0;
+				while (s2[i]>='0' && s2[i]<='9')
+				{
+					b[demb].heso = b[demb].heso*10+s2[i] - '0';
+					i++;
+				}
+				i+=3;
+				while (s2[i]>='0' && s2[i]<='9'){
+					b[demb].mu = b[demb].mu*10+s2[i]-'0';
+					i++;
+				}
+				demb++;
+			}
+		}
+		xuly(a, b, dema, demb);
+	}
+}
