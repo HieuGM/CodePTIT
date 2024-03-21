@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<string.h>
+struct thisinh{
+	int ma;
+	char ten[105];
+	char ngaysinh[105];
+	double diem1, diem2, diem3;
+	double tong;
+};
+typedef struct thisinh ts;
+void nhap(ts t[105], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		t[i].ma = i+1;
+		gets(t[i].ten);
+		scanf("\n");
+		gets(t[i].ngaysinh);
+		scanf("\n");
+		scanf("%lf%lf%lf\n", &t[i].diem1, &t[i].diem2, &t[i].diem3);
+		t[i].tong = t[i].diem1+t[i].diem2+t[i].diem3;
+	}
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n-i-1; j++)
+		{
+			if (t[j].tong < t[j+1].tong)
+			{
+				ts tmp = t[j];
+				t[j] = t[j+1];
+				t[j+1] = tmp;
+			}
+		}
+	}
+}
+void xuat(ts t[105], int n)
+{
+	for (int i = 0; i < n; i++) printf("%d %s %s %.1lf\n", t[i].ma, t[i].ten, t[i].ngaysinh, t[i].tong);
+}
+int main()
+{
+	int n;
+	scanf("%d\n", &n);
+	ts t[105];
+	nhap(t, n);
+	xuat(t, n);
+}
