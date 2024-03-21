@@ -1,0 +1,79 @@
+#include<stdio.h>
+#include<stdlib.h>
+void xuat(int a[], int n)
+{
+	for (int i = 0; i < n; i++) printf("%d ", a[i]);
+	
+}
+int cmp1(const void *ptr1, const void *ptr2)
+{
+	int *x = (int*) ptr1;
+	int *y = (int*) ptr2;
+	return *x-*y;
+}
+int main()
+{
+	int m, n;
+	scanf("%d%d", &m, &n);
+	int a[105], b[105];
+	int mark[1005] = {0};
+	int mark2[1005] = {0};
+	int c[105], d[105];
+	int tmp = 0, cnt = 0;
+	for (int i= 0; i < m; i++)
+	{
+		scanf("%d", &a[i]);
+		if (mark[a[i]] == 0)
+		{
+			c[tmp] = a[i];
+			tmp++;
+			mark[a[i]] = 1;
+		}
+	}
+	for (int i= 0; i < n; i++)
+	{
+		scanf("%d", &b[i]);
+		if (mark2[b[i]] == 0)
+		{
+			d[cnt] = b[i];
+			cnt++;
+			mark2[b[i]] = 1;
+		}
+	}
+	int giao[105], hieu1[105], hieu2[105];
+	int cnt1 = 0, cnt2= 0, cnt3 = 0;
+	for (int i = 0; i < tmp; i++)
+	{
+		int tmp2 = 0;
+		for (int j = 0; j < cnt; j++)
+		{
+			if (d[j] == c[i]) 
+			{
+				giao[cnt1++] = d[j];
+				tmp2 = 1;
+			}
+		}
+		if (tmp2 == 0) hieu1[cnt2++] = c[i];
+	}
+	for (int i = 0; i < cnt; i++)
+	{
+		int tmp2 = 0;
+		for (int j = 0; j < cnt1; j++)
+		{
+			if (d[i] == giao[j])
+			{
+				tmp2 = 1; 
+				break;
+			}
+		}
+		if (tmp2 == 0) hieu2[cnt3++] = d[i];
+	}
+	qsort(hieu1, cnt2, sizeof(int), cmp1);
+	qsort(hieu2, cnt3, sizeof(int), cmp1);
+	qsort(giao, cnt1, sizeof(int), cmp1);
+	xuat(giao, cnt1);
+	printf("\n");
+	xuat(hieu1, cnt2);
+	printf("\n");
+	xuat(hieu2, cnt3);
+}
