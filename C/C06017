@@ -1,0 +1,46 @@
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+#include<stdlib.h>
+int cmp(const void *ptr1, const void *ptr2)
+{
+	char *x = (char*) ptr1;
+	char *y = (char*) ptr2;
+	return strcmp(x, y);
+}
+int main()
+{
+	char s1[105], s2[105], c1[105][105], c2[105][105];
+	int n = 0, m = 0;
+	fgets(s1, 105, stdin);
+	s1[strlen(s1) - 1] = '\0';
+	fgets(s2, 105, stdin);
+	s2[strlen(s2) - 1] = '\0';
+	char *token = strtok(s1, " ");
+	while (token != NULL)
+	{
+		strcpy(c1[n++], token);
+		token = strtok(NULL, " ");
+	}
+	token = strtok(s2, " ");
+	while (token != NULL)
+	{
+		strcpy(c2[m++], token);
+		token = strtok(NULL, " ");
+	}
+	qsort(c1, n, sizeof(c1[0]), cmp);
+	for (int i = 0; i < n; i++)
+	{
+		while (strcmp(c1[i], c1[i+1]) == 0) i++;
+		int tmp = 0;
+		for (int j = 0; j < m; j++)
+		{
+			if (strcmp(c1[i], c2[j]) == 0)
+			{
+				tmp = 1; 
+				break;
+			}
+		}
+		if (tmp == 0) printf("%s ", c1[i]);
+	}
+}
