@@ -1,0 +1,48 @@
+#include<stdio.h>
+void nhap(int l[][205], int s, int t)
+{
+	for (int i = 0; i < s; i++)
+	{
+		for (int j = 0; j < t; j++) scanf("%d", &l[i][j]);
+	}
+}
+int main()
+{
+	int m, n ,p, q;
+	scanf("%d%d%d%d", &m , &n, &p, &q);
+	int a[m+5][205], b[n+5][205], d[p+5][205];
+	nhap(a, m, n);
+	nhap(b, n, p);
+	nhap(d, p, q);
+	int c[m+5][205];
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < p; j++)
+		{
+			c[i][j] = 0;
+			for (int k = 0; k < n; k++)
+			{
+				c[i][j] += a[i][k]*b[k][j];
+			}
+		}
+	}
+	int e[m+5][205];
+	for (int i = 0; i < m; i++)
+	{
+		for (int j = 0; j < q; j++)
+		{
+			e[i][j] = 0;
+			for (int k = 0; k < n; k++)
+			{
+				e[i][j] += c[i][k]*d[k][j];
+			}
+		}
+	}
+	for (int i = 0; i < m; i++){
+		for (int j = 0; j < q; j++)
+		{
+			printf("%d ", e[i][j]);
+		}
+		printf("\n");
+	}
+}
