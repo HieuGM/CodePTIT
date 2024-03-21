@@ -1,0 +1,53 @@
+#include<stdio.h>
+#include<math.h>
+#include<string.h>
+int gcd(int a, int b)
+{
+	while (b)
+	{
+		int r = a%b;
+		a = b;
+		b = r;
+	}
+	return a;
+}
+struct phanso{
+	int t1, m1, t2, m2;
+};
+typedef struct phanso ps;
+void nhap(ps *p)
+{
+	scanf("%d%d%d%d", &p->t1, &p->m1, &p->t2, &p->m2);
+}
+void thuchien(ps *p)
+{
+	int tmp1 = gcd(p->t1, p->m1);
+	int tmp2 = gcd(p->t2, p->m2);
+	p->t1 = p->t1/tmp1;
+	p->m1 = p->m1/tmp1;
+	p->t2 = p->t2/tmp2;
+	p->m2 = p->m2/tmp2;
+	int k = p->m1*p->m2/gcd(p->m1, p->m2);
+	p->t1 = p->t1*k/p->m1;
+	p->t2 = p->t2*k/p->m2;
+	printf("%d/%d %d/%d\n", p->t1, k, p->t2, k);
+	int k1 = p->t1 + p->t2;
+	int k2 = gcd(k, k1);
+	printf("%d/%d\n", k1/k2, k/k2);
+	int k3 = gcd(p->t1, p->t2);
+	printf("%d/%d", p->t1/k3, p->t2/k3);
+}
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	int cnt = 1;
+	while (t--)
+	{
+		ps ds;
+		nhap(&ds);
+		printf("Case #%d:\n", cnt++);
+		thuchien(&ds);
+		if (t>0) printf("\n");
+	}
+}
