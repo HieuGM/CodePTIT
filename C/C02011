@@ -1,0 +1,16 @@
+#include<stdio.h>
+int main()
+{
+	int m, n;
+	scanf("%d%d", &m, &n);
+	for (int i = 1; i <= m; i++)
+	{
+		for (int j = i; j <= n+i-1; j++)
+		{
+			if (j <= n || j == i) printf("%d", j);
+			else if (i > n) printf("%d", 2*i-j);
+			else printf("%d", 2*n-j);
+		}
+		printf("\n");
+	}
+}
