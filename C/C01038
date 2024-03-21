@@ -1,0 +1,17 @@
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+	int n; 
+	scanf("%d", &n);
+	int m = n%10, tmp = n/10;
+	int cnt = 0;
+	while (n>10) 
+	{
+		n/=10;
+		cnt++;
+	}
+	tmp = tmp - n*pow(10,cnt-1);
+	tmp = tmp*10 + n + m*pow(10,cnt); 
+	printf("%d", tmp);
+}
