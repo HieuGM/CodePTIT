@@ -1,0 +1,25 @@
+#include<stdio.h>
+#include<math.h>
+#include<stdlib.h>
+int cmp1(const void *ptr1, const void *ptr2)
+{
+	int *x = (int*) ptr1;
+	int *y = (int*) ptr2;
+	return *x-*y;
+}
+int main()
+{
+	int n, m, k;
+	scanf("%d%d%d", &n, &m, &k);
+	int a[1005];
+	for (int i = 0; i < m; i++) scanf("%d", &a[i]);
+	qsort(a, m, sizeof(int), cmp1);
+	int dem = 0;
+	if (a[0]-k > 1) dem += ceil(1.0*(a[0]-k-1)/(2*k+1));
+	for (int i = 0; i < m-1; i++)
+	{
+		if (a[i] + k < a[i+1] - k) dem += ceil(1.0*(a[i+1]-a[i]-2*k-1)/(2*k+1));
+	}
+	if (a[m-1]+k < n) dem += ceil(1.0*(n-a[m-1]-k)/(2*k+1));
+	printf("%d", dem);
+}
