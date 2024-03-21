@@ -1,0 +1,48 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+
+struct tu{
+	char s[1005];
+	int cnt;
+};
+typedef struct tu tu;
+int dem = 1; // Tong so tu
+int len = 0; // do dai max
+void nhap(tu t[1005])
+{
+	int n;
+	while (scanf("%d", &n) != -1)
+	{
+		char a[1005];
+		scanf("%s", a);
+		if (strlen(a) > len) len = strlen(a);
+		int tmp = 0;
+		for (int i = 0; i < dem; i++)
+		{
+			if (strcmp(t[i].s, a) == 0 && len == strlen(a))
+			{
+				t[i].cnt++;
+				tmp = 1;
+			}
+		}
+		if (tmp == 0 && len == strlen(a))
+		{
+			t[dem].cnt = 1;
+			strcpy(t[dem++].s, a);
+		}
+	}
+}
+void xuat(tu t[1005])
+{
+	for (int i = 0; i < dem; i++)
+	{
+		if (strlen(t[i].s) == len) printf("%s %d %d\n", t[i].s, len, t[i].cnt);
+	}
+}
+int main()
+{
+	tu t[1005];
+	nhap(t);
+	xuat(t);
+}
