@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<string.h>
+struct mathang{
+	int ma;
+	char ten[105];
+	char nhom[105];
+	double mua;
+	double ban;
+	double loi;
+};
+typedef struct mathang mathang;
+void nhap(mathang t[105], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		t[i].ma = i+1;
+		gets(t[i].ten);
+		scanf("\n");
+		gets(t[i].nhom);
+		scanf("\n");
+		scanf("%lf%lf", &t[i].mua, &t[i].ban);
+		scanf("\n");
+		t[i].loi = t[i].ban - t[i].mua;
+	}
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n-i-1; j++)
+		{
+			if (t[j].loi < t[j+1].loi)
+			{
+				mathang tmp = t[j];
+				t[j] = t[j+1];
+				t[j+1] = tmp;
+			}
+		}
+	}
+}
+void xuat(mathang t[105], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		printf("%d %s %s %.2lf\n", t[i].ma, t[i].ten, t[i].nhom, t[i].loi);
+	}
+}
+int main()
+{
+	int n;
+	scanf("%d\n", &n);
+	mathang t[105];
+	nhap(t, n);
+	xuat(t, n);
+}
