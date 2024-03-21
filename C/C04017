@@ -1,0 +1,28 @@
+#include<stdio.h>
+#include<math.h>
+int snt(int n)
+{
+	int a = sqrt(n);
+	for (int i = 2; i <= a; i++)
+	{
+		if (n%i == 0) return 0;
+	}
+	return n>1;
+}
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	int dem = 0;
+	int a[105];
+	for (int i = 0; i < n; i++)
+	{
+		scanf("%d", &a[i]);
+		if (snt(a[i])) dem++;
+	}
+	printf("%d ", dem);
+	for (int i = 0; i < n; i++)
+	{
+		if (snt(a[i])) printf("%d ", a[i]);
+	}
+}
