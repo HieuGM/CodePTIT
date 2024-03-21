@@ -1,0 +1,57 @@
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<ctype.h>
+#include<stdlib.h>
+
+struct tamgiac {
+	long long a, b, c;
+};
+typedef struct tamgiac tamgiac;
+void nhap(tamgiac *tg)
+{
+	scanf("%lld%lld%lld", &tg->a, &tg->b, &tg->c);
+}
+double dientich(tamgiac *tg)
+{
+	double p = 1.0*(tg->a + tg->b + tg->c)/2.0;
+	return sqrt(p*(p-tg->a)*(p-tg->b)*(p-tg->c));
+}
+void in(tamgiac *tg)
+{
+	printf("%lld %lld %lld", tg->a, tg->b, tg->c);
+	printf("\n");
+}
+int cmp(const void *a, const void *b)
+{
+	tamgiac *tg1 = (tamgiac*)a;
+	tamgiac *tg2 = (tamgiac*)b;
+	double dt1 = dientich(tg1);
+	double dt2 = dientich(tg2);
+	if (dt1 > dt2) return 1;
+	else return -1;
+}
+void ghi(tamgiac *ds, int n, const char *tentep)
+{
+	FILE *tep = fopen(tentep, "wb");
+	if (tep == NULL) return;
+	for (int i = 0; i < n; i++)
+    {
+        fprintf(tep, "%lld %lld %lld\n", ds[i].a, ds[i].b, ds[i].c);
+    }
+	fclose(tep);
+}
+void nhapDS(tamgiac ds[], int n)
+{
+	for (int i = 0; i<n; i++) nhap(&ds[i]);
+}
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	tamgiac ds[n+5];
+	nhapDS(ds, n);
+	qsort(ds, n, sizeof(ds[0]), cmp);
+	for (int i = 0; i < n; i++) in(&ds[i]);
+	ghi(ds, n, "FPLSP22GxxmsvTG.fpl");
+}
