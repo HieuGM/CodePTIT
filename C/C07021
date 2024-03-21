@@ -1,0 +1,75 @@
+#include<stdio.h>
+#include<string.h>
+struct sinhvien{
+	int ma;
+	char ten[105];
+	double diema, diemb, diemc;
+	double tong;
+};
+typedef struct sinhvien sv;
+int dem = 0;
+void nhap(sv t[105], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		t[i].ma = i+1;
+		scanf("\n");
+		gets(t[i].ten);
+		scanf("%lf%lf%lf", &t[i].diema, &t[i].diemb, &t[i].diemc);
+		t[i].tong = t[i].diema+t[i].diemb+t[i].diemc;
+	}
+}
+void chucnang1(sv t[105], int n)
+{
+	dem+=n;
+	nhap(t, n);
+	printf("%d\n", n);
+}
+void chucnang2(sv t[105], int n)
+{
+	sv k;
+	k.ma = n;
+	gets(k.ten);
+	scanf("%lf%lf%lf", &k.diema, &k.diemb, &k.diemc);
+	k.tong = k.diema+k.diemb+k.diemc;
+	t[n-1] = k;
+	printf("%d\n", n);
+}
+void chucnang3(sv t[105])
+{
+	for (int i = 0; i < dem; i++)
+	{
+		for (int j = 0; j<dem-i-1; j++)
+		{
+			if (t[j].tong>t[j+1].tong)
+			{
+				sv tmp = t[j];
+				t[j] = t[j+1];
+				t[j+1] = tmp;
+			}
+		}
+	}
+	for (int i = 0; i < dem; i++)
+	{
+		printf("%d %s %.1lf %.1lf %.1lf\n", t[i].ma, t[i].ten, t[i].diema, t[i].diemb, t[i].diemc);
+	}
+}
+int main()
+{
+	sv t[105];
+	while (1)
+	{
+		int m;
+		scanf("%d\n", &m);
+		if (m==3)
+		{
+			chucnang3(t);
+			break;
+		}
+		int n;
+		scanf("%d", &n);
+		scanf("\n");
+		if (m==1) chucnang1(t, n);
+		else if (m==2) chucnang2(t, n);
+	}
+}
