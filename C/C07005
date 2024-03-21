@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include<math.h>
+struct diem{
+	double x, y;
+};
+typedef struct diem diem;
+double kc(diem p1, diem p2)
+{
+	return sqrt((p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y));
+}
+double chuvi(diem A, diem B, diem C)
+{
+	double AB = kc(A, B),
+	BC = kc(B, C),
+	CA = kc(C, A);
+	if (AB+BC <= CA || AB+CA <= BC || BC+CA <= AB) return 0;
+	return AB+BC+CA;
+}
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	while (t--)
+	{
+		diem A, B, C;
+		scanf("%lf%lf%lf%lf%lf%lf", &A.x, &A.y, &B.x, &B.y, &C.x, &C.y);
+		if (chuvi(A, B, C) == 0) printf("INVALID\n");
+		else printf("%.3lf\n", chuvi(A, B, C));
+	}
+}
