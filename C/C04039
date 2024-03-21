@@ -1,0 +1,23 @@
+#include<stdio.h>
+#include<math.h>
+// Goi a[i] la k/c co the di chuyen bang i buoc di;
+// a[0] = 0;
+// a[i] = a[i-1] + (i+1)/2;
+int main()
+{
+	long long l, r;
+	long long dem = 0;
+	while (scanf("%lld", &l) != -1)
+	{
+		scanf("%lld", &r);
+		long long dis = abs(r-l);
+		long long kc = 0, i = 0, buoc = 0;
+		while (kc < dis)
+		{
+			kc += (i+1)/2;
+			buoc++; i++;
+		}
+		if (dis != 0) buoc--;
+		printf("%lld\n", buoc);
+	}
+}
