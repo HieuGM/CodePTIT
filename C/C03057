@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<math.h>
+long long min(long long n)
+{
+	long long sum = 0;
+	long long cnt = 1;
+	while (n)
+	{
+		int tmp = n%10;
+		if (tmp == 6) tmp = 5;
+		sum += tmp * cnt;
+		n/=10;
+		cnt *= 10;
+	}
+	return sum;
+}
+long long max(long long n)
+{
+	long long sum = 0;
+	long long cnt = 1;
+	while (n)
+	{
+		int tmp = n%10;
+		if (tmp == 5) tmp = 6;
+		sum += tmp * cnt;
+		n/=10;
+		cnt *= 10;
+	}
+	return sum;
+}
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	while (t--)
+	{
+		long long x1, x2;
+		scanf("%lld%lld", &x1, &x2);
+		printf("%lld %lld\n", min(x1) + min(x2), max(x1) + max(x2));
+	}
+}
