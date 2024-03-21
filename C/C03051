@@ -1,0 +1,29 @@
+#include<stdio.h>
+#include<math.h>
+int snt(int n)
+{
+	int a = sqrt(n);
+	for (int i = 2; i <= a; i++)
+	{
+		if (n%i == 0) return 0;
+	}
+	return n>1;
+}
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	while (t--)
+	{
+		long long l, r;
+		scanf("%lld%lld", &l, &r);
+		int a = sqrt(l), b = sqrt(r);
+		if (a*a < l) a++;
+		int sum = 0;
+		for (int i = a; i <= b; i++)
+		{
+			if (snt(i)) sum++;
+		}
+		printf("%d\n", sum);
+	}
+}
