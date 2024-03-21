@@ -1,0 +1,33 @@
+#include<stdio.h>
+#include<math.h>
+int tn(long long n)
+{
+	long long m = 0; 
+	long long tmp = n;
+	int sum = 0;
+	while (n)
+	{
+		m = m*10 + n%10;
+		sum += n%10;
+		n/=10;
+	}
+	if (m == tmp && sum%10 == 0) return 1;
+	return 0;
+}
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	while (t--)
+	{
+		int n;
+		scanf("%d", &n);
+		int cnt = 0;
+		long long l = pow(10, n-1), r = pow(10, n);
+		for (int i = l; i < r; i++)
+		{
+			if (tn(i)) cnt++;
+		}
+		printf("%d\n", cnt);
+	}
+}
