@@ -1,0 +1,19 @@
+#include<stdio.h>
+int tcs(int n)
+{
+	int sum = 0;
+	while (n)
+	{
+		sum += n%10;
+		n/=10;
+	}
+	return sum;
+}
+int main()
+{
+	int a, b;
+	scanf("%d%d", &a, &b);
+	int sum1 = tcs(a), sum2 = tcs(b);
+	if (sum1 > sum2) printf("%d %d", b, a);
+	else printf("%d %d", a, b);
+}
