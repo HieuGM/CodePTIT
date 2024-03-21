@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<math.h>
+int cat(int n)
+{
+	if (n == 1) return 1;
+	else if (n == 0 || n == 8 || n == 9) return 0;
+	else return 2;
+}
+int main()
+{
+	int t; 
+	scanf("%d", &t);
+	while (t--)
+	{
+		long long n;
+		scanf("%lld", &n);
+		long long sum = 0;
+		int cnt = 0;
+		int k = 0;
+		while (n)
+		{
+			int tmp = n%10;
+			if (cat(tmp) == 2) 
+			{
+				printf("INVALID\n");
+				k = 1;
+				break;
+			}
+			else sum = sum + cat(tmp)*pow(10, cnt);
+			n/=10;
+			cnt++;
+		}
+		if (sum == 0 && k == 0) printf("INVALID\n");
+		else if (k==0) printf("%lld\n", sum);
+	}
+}
