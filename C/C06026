@@ -1,0 +1,68 @@
+#include<stdio.h>
+#include<string.h>
+/*
+	B1: Doc thong tin
+	B2: Kiem tra neu tu dang xet la thuan nghich thi luu vao danh sach
+		B2.1: Neu tu do da xuat hien trong ds thi cnt++;
+		B2.2: Neu tu chua xuat hien trong ds thi luu vao ds;
+	B3: Duyet qua ds, tim tu co do dai max.
+*/
+int len = 0; // Do dai max
+int dem = 0; // So cac tu thuan nghich
+struct tu{
+	char s[1005];
+	int cnt;
+};
+typedef struct tu tu;
+
+int tn(char a[]) // Kiem tra thuan nghich
+{
+	int l = 0, r = strlen(a) - 1;
+	while (l<r)
+	{
+		if (a[l]!=a[r]) return 0;
+		l++;r--;
+	}
+	return 1;
+}
+
+void nhap(tu t[1005])
+{
+	int n;
+	while (scanf("%d", &n) != -1)
+	{
+		char p[1005];
+		scanf("%s", p);
+		if (tn(p)) // Chi luu cac tu thuan nghich
+		{
+			if (strlen(p) > len) len = strlen(p); // Tim do dai max
+			int tmp = 1;
+			for (int i = 0; i < dem; i++)
+			{
+				if (strcmp(t[i].s, p) == 0) // Neu tu do da xuat hien thi cnt++;
+				{
+					tmp = 0;
+					t[i].cnt++;
+				}
+			}
+			if (tmp == 1)
+			{
+			    t[dem].cnt = 1;
+			    strcpy(t[dem++].s, p);
+			}// Neu tu do chua xuat hien thi them vao ds
+		}
+	}
+}
+void xuat(tu t[1005])
+{
+	for (int i = 0; i < dem; i++)
+	{
+		if (strlen(t[i].s) == len) printf("%s %d\n", t[i].s, t[i].cnt); // In ra nhung tu co do dai max
+	}
+}
+int main()
+{
+	tu t[1005];
+	nhap(t);
+	xuat(t);
+}
