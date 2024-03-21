@@ -1,0 +1,25 @@
+#include<stdio.h>
+void sx(int a[], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		int x = a[i], tmp = i-1;
+		while (tmp >= 0 && x < a[tmp])
+		{
+			a[tmp+1] = a[tmp];
+			tmp--;
+		}
+		a[tmp+1] = x;
+		printf("Buoc %d: ", i);
+		for (int j = 0; j <= i; j++) printf("%d ", a[j]);
+		printf("\n");
+	}
+}
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	int a[105];
+	for (int i = 0; i < n; i++) scanf("%d", &a[i]);
+	sx(a, n);
+}
