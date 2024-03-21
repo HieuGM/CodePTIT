@@ -1,0 +1,28 @@
+#include<stdio.h>
+void sx(int a[], int n)
+{
+	for (int i = 0; i < n-1; i++)
+	{
+		int tmp = i+1;
+		for (int j = i+1; j < n; j++)
+		{
+			if (a[tmp] > a[j]) tmp = j;
+		}
+		if (a[i] > a[tmp])
+		{
+			int cnt = a[i];
+			a[i] = a[tmp];
+			a[tmp] = cnt;
+		}
+		for (int j = 0; j < n; j++) printf("%d ", a[j]);
+		printf("\n");
+	}
+}
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	int a[105];
+	for (int i = 0; i < n; i++) scanf("%d", &a[i]);
+	sx(a, n);
+}
