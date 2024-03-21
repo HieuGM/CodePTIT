@@ -1,0 +1,28 @@
+#include<stdio.h>
+#include<string.h>
+int lis(char c[])
+{
+	int n = strlen(c);
+	int l[60];
+	for (int i = 0; i < n; i++) l[i] = 1;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < i; j++)
+		{
+			if (c[j] < c[i] && l[j]+1>l[i]) l[i] = l[j]+1;
+			else l[i] = l[i];
+		}
+	}
+	int max = 0;
+	for (int i = 0; i < n; i++)
+	{
+		if (l[i] > max) max = l[i];
+	}
+	return 26-max;
+}
+int main()
+{
+	char c[60];
+	scanf("%s", c);
+	printf("%d", lis(c));
+}
