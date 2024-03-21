@@ -1,0 +1,43 @@
+#include<stdio.h>
+#include<stdlib.h>
+int cmp1(const void *ptr1, const void *ptr2)
+{
+	int *x = (int*) ptr1;
+	int *y = (int*) ptr2;
+	return *x-*y;
+}
+int cmp2(const void *ptr1, const void *ptr2)
+{
+	int *x = (int*) ptr1;
+	int *y = (int*) ptr2;
+	return *y-*x;
+}
+void nhap(int a[], int n)
+{
+	for (int i = 0; i < n; i++) scanf("%d", &a[i]);
+}
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	int tmp = 1;
+	while (t--)
+	{
+		int n;
+		scanf("%d", &n);
+		int a[105], b[105];
+		nhap(a, n);
+		nhap(b, n);
+		qsort(a, n, sizeof(int), cmp1);
+		qsort(b, n, sizeof(int), cmp2);
+		int cnt = 0, dem = 0;
+		printf("Test %d:\n", tmp);
+		for (int i = 0; i < 2*n; i++)
+		{
+			if (i%2 == 0) printf("%d ", a[cnt++]);
+			else printf("%d ", b[dem++]);
+		}
+		tmp++;
+		printf("\n");
+	}
+}
