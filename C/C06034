@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+int a[] = {1, 5, 10, 50, 100, 500, 1000};
+char s[] = "IVXLCDM";
+int chuyen(char c)
+{
+	for (int i = 0; i < 7; i++)
+	{
+		if (c == s[i]) return i;
+	}
+}
+long long stp(char c[])
+{
+	int n = strlen(c);
+	long long sum = a[chuyen(c[n-1])];
+	for (int i = n-1; i > 0; i--)
+	{
+		int tmp1 = chuyen(c[i]);
+		int tmp2 = chuyen(c[i-1]);
+		if (a[tmp1] <= a[tmp2]) sum += a[tmp2];
+		else sum -= a[tmp2];
+	}
+	return sum;
+}
+int main()
+{
+	int t;
+	scanf("%d", &t);
+	while (t--)
+	{
+		char c[1000005];
+		scanf("%s", c);
+		printf("%lld\n", stp(c));
+	}
+}
