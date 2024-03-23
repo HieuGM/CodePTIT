@@ -9,9 +9,21 @@ int ucln(int a, int b)
 	}
 	return a;
 }
+void swap(int a, int b)
+{
+	int tmp = a; 
+	a = b;
+	b = tmp;
+}
 int main()
 {
-	int a, b;
-	scanf("%d%d", &a, &b);
-	printf("%d", ucln(a, b));
+	int t;
+	scanf("%d", &t);
+	while (t--)
+	{
+		int a, b;
+		scanf("%d%d", &a, &b);
+		if (a<b) swap(a, b);
+		printf("%d\n", ucln(a, b));
+	}
 }
